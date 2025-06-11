@@ -50,12 +50,10 @@ let calcScrollValue = () => {
 window.onscroll = calcScrollValue;
 window.onload = calcScrollValue;
 
-
-// AOS function
 AOS.init();
 
 
-//shopping besket
+//panier
 document.addEventListener("DOMContentLoaded", function () {
     const cartList = document.querySelector('.cart-list');
     const totalPriceEl = document.getElementById('total-price');
@@ -87,6 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       cartList.appendChild(cartItem);
       updateTotal();
+      saveCartToLocalStorage();
+
     }
 
     document.querySelectorAll('.add-to-cart').forEach(btn => {
@@ -102,8 +102,21 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
-// shopping besket end
 
+// localStorage pour le panier
+function saveCartToLocalStorage() {
+  const cartItems = [];
+  document.querySelectorAll('.cart-list .cart-item').forEach(item => {
+    const nom = item.querySelector('h3').textContent;
+    const prix = parseFloat(item.querySelector('.price').textContent.replace('$', ''));
+    const image = item.querySelector('img').getAttribute('src');
+
+    cartItems.push({ nom, prix, image });
+  });
+
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+// Fonction
 document.querySelector('.checkout-btn').addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -144,19 +157,17 @@ document.querySelector('.checkout-btn').addEventListener('click', function (e) {
 });
 
 
+// // mettre a jour la quantité du panier
+// function updateCartQuantity() {
+//   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+//   let totalQuantity = 0;
 
+//   cart.forEach(item => {
+//     totalQuantity += item.quantity;
+//   });
 
-// mettre a jour la quantité du panier
-function updateCartQuantity() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let totalQuantity = 0;
-
-  cart.forEach(item => {
-    totalQuantity += item.quantity;
-  });
-
-  document.querySelector(".quantity").textContent = totalQuantity;
-}
+//   document.querySelector(".quantity").textContent = totalQuantity;
+// }
 
 // Mettre à jour dès que la page se charge
 document.addEventListener("DOMContentLoaded", updateCartQuantity);
