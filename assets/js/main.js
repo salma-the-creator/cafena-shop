@@ -169,5 +169,5 @@ document.querySelector('.checkout-btn').addEventListener('click', function (e) {
 //   document.querySelector(".quantity").textContent = totalQuantity;
 // }
 
-// Mettre à jour dès que la page se charge
+
 document.addEventListener("DOMContentLoaded", updateCartQuantity);
