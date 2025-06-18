@@ -157,17 +157,7 @@ document.querySelector('.checkout-btn').addEventListener('click', function (e) {
 });
 
 
-// // mettre a jour la quantité du panier
-// function updateCartQuantity() {
-//   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-//   let totalQuantity = 0;
 
-//   cart.forEach(item => {
-//     totalQuantity += item.quantity;
-//   });
-
-//   document.querySelector(".quantity").textContent = totalQuantity;
-// }
 
 
 document.addEventListener("DOMContentLoaded", updateCartQuantity);
